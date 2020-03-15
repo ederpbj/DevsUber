@@ -1,21 +1,17 @@
-import React, { Component } from 'react'
-import { Text, SafeAreaView } from 'react-native'
-import { Provider } from 'react-redux'
-import {store, persistor} from './src/store'
-import { PersistGate } from 'redux-persist/integration/react'
+import React from 'react';
+import {SafeAreaView, Text} from 'react-native';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/es/integration/react';
+import {store, persistor} from './src/store';
 
-const Teste = () => {
-  return (
-    <SafeAreaView>
-      <Text>...</Text>
-    </SafeAreaView>
-  );
-}
+import MainStack from './src/navigators/MainStack';
 
+//Componentes do redux
 export default () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Teste />
+      <MainStack />
     </PersistGate>
   </Provider>
 );
+//MainStack -> Preload -> Login
