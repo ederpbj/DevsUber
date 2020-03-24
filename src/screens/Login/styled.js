@@ -22,6 +22,7 @@ export const Menu = styled.View`
   background-color: #3574cb;
   flex-direction: row;
   padding-left: 20px;
+  margin-bottom: 20px;
 `;
 
 export const MenuItem = styled.TouchableHighlight`
@@ -38,8 +39,8 @@ export const MenuItemText = styled.Text`
 export const Input = styled.TextInput`
   margin: 10px 20px;
   border-bottom-width: 2px;
-  border-bottom-color: #999;
-  height: 40px;
+  border-bottom-color: #ccc;
+  height: 50px;
   font-size: 16px;
   color: #333;
 `;
@@ -48,7 +49,7 @@ export const ActionButton = styled.TouchableHighlight`
   background-color: #3574cb;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 50px;
   border-radius: 5px;
   margin: 20px;
   box-shadow: 1px 2px 2px #999;
@@ -56,5 +57,5 @@ export const ActionButton = styled.TouchableHighlight`
 
 export const ActionButtonText = styled.Text`
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
 `;
