@@ -20,7 +20,7 @@ export default () => ({
           error: '',
         };
 
-        if (email === 'erro@hotmail.com') {
+        if (email == 'erro@hotmail.com') {
           json.error = 'E-mail e / ou senha errados!';
         } else {
           json.token = '123';
