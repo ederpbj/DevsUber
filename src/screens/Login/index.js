@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StatusBar, Platform, Text, Alert} from 'react-native';
+import {StatusBar, Platform, Alert, ActivityIndicator} from 'react-native';
 import userDevsUberApi from '../../useDevsUberApi';
 import {
   Container,
@@ -11,6 +11,7 @@ import {
   Input,
   ActionButton,
   ActionButtonText,
+  LoadingArea,
 } from './styled';
 
 //Reducer
@@ -26,13 +27,18 @@ const Page = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   //const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handlerSignIn = async () => {
     if (email && password) {
+      //Antes da Requisição
+      setLoading(true);
       const res = await api.signin(email, password);
+      //Depois da requisição
+      setLoading(false);
 
       if (res.error) {
-        //Alert(res.error);
+        console.log('Erro do signIn');
         Alert.alert(res.error);
       } else {
         //1. guardar o token no reducer, setar no reducer
@@ -43,7 +49,7 @@ const Page = props => {
             //Zera o histórico
             index: 0,
             //Manda para HomeStack
-            actions: [NavigationActions.navigate({routeName: 'HomeStack'})],
+            actions: [NavigationActions.navigate({routeName: 'HomeDrawer'})],
           }),
         );
       }
@@ -53,10 +59,12 @@ const Page = props => {
 
   const handlerSignUp = async () => {
     if (name && email && password) {
+      setLoading(true);
       const res = await api.signin(name, email, password);
+      setLoading(false);
 
       if (res.error) {
-        Alert.alert('Erro do signUp');
+        console.log('Erro do signUp');
         Alert.alert(res.error);
       } else {
         //1. guardar o token no reducer, setar no reducer
@@ -65,7 +73,8 @@ const Page = props => {
         props.navigation.dispatch(
           StackActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({routeName: 'HomeStack'})],
+            //actions: [NavigationActions.navigate({routeName: 'HomeStack'})],
+            actions: [NavigationActions.navigate({routeName: 'HomeDrawer'})],
           }),
         );
       }
@@ -100,6 +109,7 @@ const Page = props => {
           onChangeText={t => setName(t)}
           placeholder="Nome"
           placeholderTextColor="#999"
+          editable={!loading}
         />
       )}
 
@@ -110,6 +120,7 @@ const Page = props => {
         autoCapitalize="none"
         placeholder="E-mail"
         placeholderTextColor="#999"
+        editable={!loading}
       />
       <Input
         value={password}
@@ -117,21 +128,26 @@ const Page = props => {
         onChangeText={t => setPassword(t)}
         placeholder="Senha"
         placeholderTextColor="#999"
+        editable={!loading}
       />
 
       {activeMenu === 'signin' && (
-        <ActionButton onPress={handlerSignIn}>
+        <ActionButton disabled={loading} onPress={handlerSignIn}>
           <ActionButtonText>Login</ActionButtonText>
         </ActionButton>
       )}
 
       {activeMenu === 'signup' && (
-        <ActionButton onPress={handlerSignUp}>
+        <ActionButton disabled={loading} onPress={handlerSignUp}>
           <ActionButtonText>Cadastrar</ActionButtonText>
         </ActionButton>
       )}
 
-      <Text>TOKEN: {props.token}</Text>
+      {loading && (
+        <LoadingArea>
+          <ActivityIndicator size="large" color="#FFF" />
+        </LoadingArea>
+      )}
     </Container>
   );
 };
