@@ -5,7 +5,19 @@ import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import {MapsAPI} from '../../config';
 
-import {Container} from './styled';
+//Desabilita yellow box
+console.disableYellowBox = true;
+//console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
+
+import {
+  Container,
+  IntineraryArea,
+  IntineraryItem,
+  IntineraryLabel,
+  IntineraryPoint,
+  IntineraryTitle,
+  IntineraryValue,
+} from './styled';
 
 const Page = () => {
   const map = useRef();
@@ -30,6 +42,7 @@ const Page = () => {
     getMyCurrentPosition();
   }, []);
 
+  //Pegar as informações da minha localização
   const getMyCurrentPosition = () => {
     Geolocation.getCurrentPosition(
       async info => {
@@ -68,6 +81,26 @@ const Page = () => {
     <Container>
       <StatusBar barStyle="dark-content" />
       <MapView ref={map} style={{flex: 1}} provider="google" camera={mapLoc} />
+      <IntineraryArea>
+        <IntineraryItem>
+          <>
+            <IntineraryLabel>
+              <IntineraryPoint />
+              <IntineraryTitle>Origem</IntineraryTitle>
+            </IntineraryLabel>
+            <IntineraryValue>...</IntineraryValue>
+          </>
+        </IntineraryItem>
+        <IntineraryItem>
+          <>
+            <IntineraryLabel>
+              <IntineraryPoint />
+              <IntineraryTitle>Destino</IntineraryTitle>
+            </IntineraryLabel>
+            <IntineraryValue>...</IntineraryValue>
+          </>
+        </IntineraryItem>
+      </IntineraryArea>
     </Container>
   );
 };
