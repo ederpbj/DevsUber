@@ -53,7 +53,7 @@ const Page = () => {
         );
 
         if (geo.results.length > 0) {
-          console.log("RESULTS[0]: ",geo.results[0]);
+          //console.log("RESULTS[0]: ",geo.results[0]);
 
           const loc = {
             name: geo.results[0].formatted_adress,
@@ -69,6 +69,10 @@ const Page = () => {
 
           setMapLoc(loc);
           setFromLoc(loc);
+          //console.log("====>Endereço: ", fromLoc)
+          //console.log("====>Endereço: ", fromLoc)
+          //console.log("RESULTS[0]: ",geo.results[0]);
+          //console.log("====>Endereço: ", loc)
         }
       },
       error => {
@@ -85,16 +89,16 @@ const Page = () => {
         <IntineraryItem>
           <>
             <IntineraryLabel>
-              <IntineraryPoint />
+              <IntineraryPoint color="#0000FF" />
               <IntineraryTitle>Origem</IntineraryTitle>
             </IntineraryLabel>
-            <IntineraryValue>...</IntineraryValue>
+            <IntineraryValue>{fromLoc.name}</IntineraryValue>
           </>
         </IntineraryItem>
         <IntineraryItem>
           <>
             <IntineraryLabel>
-              <IntineraryPoint />
+              <IntineraryPoint color="#00FF00" />
               <IntineraryTitle>Destino</IntineraryTitle>
             </IntineraryLabel>
             <IntineraryValue>...</IntineraryValue>
