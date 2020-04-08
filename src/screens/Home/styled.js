@@ -37,6 +37,7 @@ export const IntineraryItem = styled.TouchableHighlight`
 export const IntineraryLabel = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const IntineraryPoint = styled.View`
@@ -54,4 +55,10 @@ export const IntineraryTitle = styled.Text`
 export const IntineraryValue = styled.Text`
   color: #000;
   font-size: 16px;
+`;
+
+export const IntineraryPlaceHolder = styled.Text`
+  color: #555;
+  font-size: 16px;
+  text-align: center;
 `;

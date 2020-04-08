@@ -17,6 +17,7 @@ import {
   IntineraryPoint,
   IntineraryTitle,
   IntineraryValue,
+  IntineraryPlaceHolder,
 } from './styled';
 
 const Page = () => {
@@ -56,7 +57,7 @@ const Page = () => {
           //console.log("RESULTS[0]: ",geo.results[0]);
 
           const loc = {
-            name: geo.results[0].formatted_adress,
+            name: geo.results[0].formatted_address,
             center: {
               latitude: info.coords.latitude,
               longitude: info.coords.longitude,
@@ -92,7 +93,12 @@ const Page = () => {
               <IntineraryPoint color="#0000FF" />
               <IntineraryTitle>Origem</IntineraryTitle>
             </IntineraryLabel>
-            <IntineraryValue>{fromLoc.name}</IntineraryValue>
+            {fromLoc.name && <IntineraryValue>{fromLoc.name}</IntineraryValue>}
+            {!fromLoc.name && (
+              <IntineraryPlaceHolder>
+                Escolha um local de origem
+              </IntineraryPlaceHolder>
+            )}
           </>
         </IntineraryItem>
         <IntineraryItem>
@@ -101,7 +107,12 @@ const Page = () => {
               <IntineraryPoint color="#00FF00" />
               <IntineraryTitle>Destino</IntineraryTitle>
             </IntineraryLabel>
-            <IntineraryValue>...</IntineraryValue>
+            {toLoc.name && <IntineraryValue>{toLoc.name}</IntineraryValue>}
+            {!toLoc.name && (
+              <IntineraryPlaceHolder>
+                Escolha um local de destino
+              </IntineraryPlaceHolder>
+            )}
           </>
         </IntineraryItem>
       </IntineraryArea>
