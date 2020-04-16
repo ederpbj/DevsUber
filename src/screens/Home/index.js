@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {StatusBar, SafeAreaView, Text} from 'react-native';
+import {StatusBar} from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
@@ -37,13 +37,20 @@ const Page = () => {
   //De -> para
   const [fromLoc, setFromLoc] = useState({});
   const [toLoc, setToLoc] = useState({});
+  const [showDirections, setShowDirections] = useState(false);
 
   useEffect(() => {
     Geocoder.init(MapsAPI, {language: 'pt-br'});
     getMyCurrentPosition();
   }, []);
 
-  //Pegar as informações da minha localização
+  useEffect(() => {
+    if (fromLoc.center && toLoc.center) {
+      setShowDirections(true);
+    }
+  }, [toLoc]);
+
+  //Pegar as informações da minha localização atual
   const getMyCurrentPosition = () => {
     Geolocation.getCurrentPosition(
       async info => {
@@ -82,12 +89,48 @@ const Page = () => {
     );
   };
 
+  //Função captura clik no mapa origem
+  const handleFromClick = () => {};
+
+  //Função captura clik no mapa destino
+  const handleToClick = async () => {
+    //Pega localização
+    const geo = await Geocoder.from('Charleston Park');
+    //Se achou local
+    if (geo.results.length > 0) {
+      //Montagem
+      const loc = {
+        name: geo.results[0].formatted_address,
+        center: {
+          latitude: geo.results[0].geometry.location.lat,
+          longitude: geo.results[0].geometry.location.lng,
+        },
+        zoom: 16,
+        pitch: 0,
+        altitude: 0,
+        heading: 0,
+      };
+      //Quando setar preenche no app o to
+      setToLoc(loc);
+    }
+  };
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
-      <MapView ref={map} style={{flex: 1}} provider="google" camera={mapLoc} />
+      <MapView ref={map} style={{flex: 1}} provider="google" camera={mapLoc}>
+        {fromLoc.center && (
+          <MapView.Marker pinColor="black" coordinate={fromLoc.center} />
+        )}
+
+        {toLoc.center && (
+          <MapView.Marker pinColor="black" coordinate={toLoc.center} />
+        )}
+
+        {showDirections && <></>}
+      </MapView>
       <IntineraryArea>
-        <IntineraryItem>
+        <IntineraryItem onPress={handleFromClick} underlayColor="#EEE">
           <>
             <IntineraryLabel>
               <IntineraryPoint color="#0000FF" />
@@ -101,7 +144,8 @@ const Page = () => {
             )}
           </>
         </IntineraryItem>
-        <IntineraryItem>
+
+        <IntineraryItem onPress={handleToClick} underlayColor="#EEE">
           <>
             <IntineraryLabel>
               <IntineraryPoint color="#00FF00" />
