@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
+import MapViewDirections from 'react-native-maps-directions';
 import {MapsAPI} from '../../config';
 
 //Desabilita yellow box
@@ -127,7 +128,15 @@ const Page = () => {
           <MapView.Marker pinColor="black" coordinate={toLoc.center} />
         )}
 
-        {showDirections && <></>}
+        {showDirections && 
+          <MapViewDirections
+            orignin={fromLoc.center}
+            destination={toLoc.center}
+            strokeWidth={5}
+            strokeColor="black"
+            apikey={MapsAPI}
+          />
+        }
       </MapView>
       <IntineraryArea>
         <IntineraryItem onPress={handleFromClick} underlayColor="#EEE">
