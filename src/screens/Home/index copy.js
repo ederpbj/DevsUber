@@ -118,8 +118,7 @@ const Page = () => {
 
   // Rotas
   const handleDirectionsReady = (r) => {
-    
-    // console.log("RES: ",r)
+    console.log("RES: ",r)
   }
 
   return (
@@ -136,19 +135,17 @@ const Page = () => {
 
         {showDirections &&
           <MapViewDirections
-            origin={fromLoc.center}
+            orignin={fromLoc.center}
             destination={toLoc.center}
             strokeWidth={5}
-            strokeColor='black'
+            strokeColor="black"
             apikey={MapsAPI}
-            waypoints={[fromLoc.center, toLoc.center]}
             onReady={handleDirectionsReady}
             strokeWidth={3}
-            strokeColor="blue"
+            strokeColor="hotpink"
             optimizeWaypoints={true}
           />
         }
-        
       </MapView>
       <IntineraryArea>
         <IntineraryItem onPress={handleFromClick} underlayColor="#EEE">

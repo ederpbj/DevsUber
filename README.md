@@ -53,5 +53,8 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 ## Links Uteis 
 
-[Alterações no Android manifest](https://github.com/ederpbj/devsuber/blob/master/android/app/src/main/AndroidManifest.xml)
+[Alterações no Android manifest](https://github.com/ederpbj/DevsUber/blob/master/android/app/src/main/AndroidManifest.xml)
+
+## Aulas 
+[Home 9 (Directions)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-9-directions)
 

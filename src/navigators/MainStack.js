@@ -16,7 +16,7 @@ export default createAppContainer(
     {
       initialRouteName: 'Preload',
       defaultNavigationOptions: {
-        header: null,
+        headerShown: false,
       },
     },
   ),
