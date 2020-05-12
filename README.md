@@ -58,3 +58,5 @@ Maps direction | `npm i react-native-maps-directions --save`
 ## Aulas 
 [Home 9 (Directions)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-9-directions)
 
+[Home 10 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-10-tempo-preco-e-distancia)
+

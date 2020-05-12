@@ -5,6 +5,7 @@ import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import MapViewDirections from 'react-native-maps-directions';
 import {MapsAPI} from '../../config';
+import useDevsUberApi from '../../useDevsUberApi';
 
 //Desabilita yellow box
 console.disableYellowBox = true;
@@ -19,10 +20,15 @@ import {
   IntineraryTitle,
   IntineraryValue,
   IntineraryPlaceHolder,
+  RequestDetails,
+  RequestDetail,
+  RequestTitle,
+  RequestValue,
 } from './styled';
 
 const Page = () => {
   const map = useRef();
+  const api = useDevsUberApi();
 
   const [mapLoc, setMapLoc] = useState({
     center: {
@@ -39,6 +45,13 @@ const Page = () => {
   const [fromLoc, setFromLoc] = useState({});
   const [toLoc, setToLoc] = useState({});
   const [showDirections, setShowDirections] = useState(false);
+  // Trajeto
+  // Distância
+  const [requestDistance, setRequestDistance] = useState(0);
+  // Tempo trajeto
+  const [requestTime, setRequestTime] = useState(0);
+  // Preço
+  const [requestPrice, setRequestPrice] = useState(0);
 
   useEffect(() => {
     Geocoder.init(MapsAPI, {language: 'pt-br'});
@@ -96,7 +109,7 @@ const Page = () => {
   //Função captura clik no mapa destino
   const handleToClick = async () => {
     //Pega localização
-    const geo = await Geocoder.from('Mangabeira Shopping');
+    const geo = await Geocoder.from('Camarao Sul');
     //Se achou local
     if (geo.results.length > 0) {
       //Montagem
@@ -117,10 +130,29 @@ const Page = () => {
   };
 
   // Rotas
-  const handleDirectionsReady = (r) => {
-    
+  const handleDirectionsReady = async r => {
+    setRequestDistance(r.distance);
+    setRequestTime(r.duration);
+
+    const priceReq = await api.getRequestPrice(r.distance, r.duration);
+
+    // Se não deu erro
+    if (!priceReq.error) {
+      setRequestPrice(priceReq.price);
+    }
+
+    // Usa as coordenadas do trajeto
+    // Ajusta trajeto na tela
+    map.current.fitToCoordinates(r.coordinates, {
+      edgePadding: {
+        left: 50,
+        right: 50,
+        bottom: 50,
+        top: 400,
+      },
+    });
     // console.log("RES: ",r)
-  }
+  };
 
   return (
     <Container>
@@ -134,21 +166,18 @@ const Page = () => {
           <MapView.Marker pinColor="black" coordinate={toLoc.center} />
         )}
 
-        {showDirections &&
+        {showDirections && (
           <MapViewDirections
             origin={fromLoc.center}
             destination={toLoc.center}
             strokeWidth={5}
-            strokeColor='black'
             apikey={MapsAPI}
             waypoints={[fromLoc.center, toLoc.center]}
-            onReady={handleDirectionsReady}
-            strokeWidth={3}
             strokeColor="blue"
+            onReady={handleDirectionsReady}
             optimizeWaypoints={true}
           />
-        }
-        
+        )}
       </MapView>
       <IntineraryArea>
         <IntineraryItem onPress={handleFromClick} underlayColor="#EEE">
@@ -178,6 +207,24 @@ const Page = () => {
                 Escolha um local de destino
               </IntineraryPlaceHolder>
             )}
+          </>
+        </IntineraryItem>
+        <IntineraryItem>
+          <>
+            <RequestDetails>
+              <RequestDetail>
+                <RequestTitle>Distância</RequestTitle>
+            <RequestValue>{requestDistance > 0?`${requestDistance.toFixed(1)} km`:'---'}</RequestValue>
+              </RequestDetail>
+              <RequestDetail>
+                <RequestTitle>Tempo</RequestTitle>
+                <RequestValue>{requestTime > 0?`${requestTime.toFixed(0)} mins`:'---'}</RequestValue>
+              </RequestDetail>
+              <RequestDetail>
+                <RequestTitle>Preço</RequestTitle>
+                <RequestValue>{requestPrice > 0?`R$ ${requestPrice.toFixed(2)}`:'---'}</RequestValue>
+              </RequestDetail>
+            </RequestDetails>
           </>
         </IntineraryItem>
       </IntineraryArea>
