@@ -43,8 +43,11 @@ export default () => ({
           error: '',
         };
 
-        json.price = distance*tempo* 0.5;
+        json.price = distance * tempo * 0.5;
 
+        if (json.price < 5) {
+          json.price = 5;
+        }
         resolve(json);
       }, 1000);
     });

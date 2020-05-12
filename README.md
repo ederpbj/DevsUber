@@ -60,3 +60,4 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 [Home 10 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-10-tempo-preco-e-distancia)
 
+[Home 11 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-11-tempo-preco-e-distancia)

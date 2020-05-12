@@ -24,6 +24,9 @@ import {
   RequestDetail,
   RequestTitle,
   RequestValue,
+  RequestButtons,
+  RequestButton,
+  RequestButtonText,
 } from './styled';
 
 const Page = () => {
@@ -109,7 +112,7 @@ const Page = () => {
   //Função captura clik no mapa destino
   const handleToClick = async () => {
     //Pega localização
-    const geo = await Geocoder.from('Camarao Sul');
+    const geo = await Geocoder.from('Valentina Figueiredo');
     //Se achou local
     if (geo.results.length > 0) {
       //Montagem
@@ -148,7 +151,7 @@ const Page = () => {
         left: 50,
         right: 50,
         bottom: 50,
-        top: 400,
+        top: 1200,
       },
     });
     // console.log("RES: ",r)
@@ -209,24 +212,42 @@ const Page = () => {
             )}
           </>
         </IntineraryItem>
-        <IntineraryItem>
-          <>
-            <RequestDetails>
-              <RequestDetail>
-                <RequestTitle>Distância</RequestTitle>
-            <RequestValue>{requestDistance > 0?`${requestDistance.toFixed(1)} km`:'---'}</RequestValue>
-              </RequestDetail>
-              <RequestDetail>
-                <RequestTitle>Tempo</RequestTitle>
-                <RequestValue>{requestTime > 0?`${requestTime.toFixed(0)} mins`:'---'}</RequestValue>
-              </RequestDetail>
-              <RequestDetail>
-                <RequestTitle>Preço</RequestTitle>
-                <RequestValue>{requestPrice > 0?`R$ ${requestPrice.toFixed(2)}`:'---'}</RequestValue>
-              </RequestDetail>
-            </RequestDetails>
-          </>
-        </IntineraryItem>
+        {fromLoc.center && toLoc.center &&
+          <IntineraryItem>
+            <>
+              <RequestDetails>
+                <RequestDetail>
+                  <RequestTitle>Distância</RequestTitle>
+                  <RequestValue>
+                    {requestDistance > 0
+                      ? `${requestDistance.toFixed(1)} km`
+                      : '---'}
+                  </RequestValue>
+                </RequestDetail>
+                <RequestDetail>
+                  <RequestTitle>Tempo</RequestTitle>
+                  <RequestValue>
+                    {requestTime > 0 ? `${requestTime.toFixed(0)} mins` : '---'}
+                  </RequestValue>
+                </RequestDetail>
+                <RequestDetail>
+                  <RequestTitle>Preço</RequestTitle>
+                  <RequestValue>
+                    {requestPrice > 0 ? `R$ ${requestPrice.toFixed(2)}` : '---'}
+                  </RequestValue>
+                </RequestDetail>
+              </RequestDetails>
+              <RequestButtons>
+                <RequestButton color="#00FF00">
+                  <RequestButtonText>Solicitar Motorista</RequestButtonText>
+                </RequestButton>
+                <RequestButton color="#FF0000">
+                  <RequestButtonText>Cancelar</RequestButtonText>
+                </RequestButton>
+              </RequestButtons>
+            </>
+          </IntineraryItem>
+        }
       </IntineraryArea>
     </Container>
   );
