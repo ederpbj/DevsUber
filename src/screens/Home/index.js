@@ -157,10 +157,38 @@ const Page = () => {
     // console.log("RES: ",r)
   };
 
+  // Botão Solicitar
+  const handleRequestGo = () => {
+
+  }
+
+  const handleRequestCancel = () => {
+    setToLoc({});
+    setShowDirections(false);
+    setRequestDistance(0);
+    setRequestTime(0);
+    setRequestPrice(0);
+    // Voltar a posição original
+    setMapLoc(fromLoc);
+  }
+
+  // Monitora mudança na posição do mapa
+  const handleMapChange = async () => {
+    // Pegar camera
+    const cam = await map.current.getCamera();
+    cam.altitude = 0;
+    setMapLoc(cam);
+  }
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
-      <MapView ref={map} style={{flex: 1}} provider="google" camera={mapLoc}>
+      <MapView
+        ref={map}
+        style={{flex: 1}}
+        provider="google"
+        camera={mapLoc}
+        onRegionChangeComplete={handleMapChange}>
         {fromLoc.center && (
           <MapView.Marker pinColor="black" coordinate={fromLoc.center} />
         )}
@@ -238,10 +266,10 @@ const Page = () => {
                 </RequestDetail>
               </RequestDetails>
               <RequestButtons>
-                <RequestButton color="#00FF00">
+                <RequestButton color="#00FF00" onPress={handleRequestGo}>
                   <RequestButtonText>Solicitar Motorista</RequestButtonText>
                 </RequestButton>
-                <RequestButton color="#FF0000">
+                <RequestButton color="#FF0000" onPress={handleRequestCancel}>
                   <RequestButtonText>Cancelar</RequestButtonText>
                 </RequestButton>
               </RequestButtons>
