@@ -1,18 +1,18 @@
 # DevsUber
 Clone do uber react-native
 
-# CMD
+# Git
 
     git clone https://github.com/ederpbj/DevsUber.git
 
     npx react-native init DevsUber
 
 # DevsUber
-Iniciando projeto v2
+Iniciando projeto
 
-[DevsUber](https://github.com/ederpbj/DevsUber.git)
+[Git-DevsUber](https://github.com/ederpbj/DevsUber.git)
 
-## Comando no terminal
+## Comandos no terminal
 
 Descrição | Comando
 --------- | ------
@@ -58,6 +58,9 @@ Maps direction | `npm i react-native-maps-directions --save`
 [Alterações no Android manifest](https://github.com/ederpbj/DevsUber/blob/master/android/app/src/main/AndroidManifest.xml)
 
 ## Aulas 
+
+[Home 8 (Intinerário)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-8-intinerario)
+
 [Home 9 (Directions)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-9-directions)
 
 [Home 10 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-10-tempo-preco-e-distancia)
@@ -66,11 +69,15 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 [Home 12 (Cancelar Viagem)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-12-cancelar-viagem)
 > Botão cancelar viagem
+
 > Botão solicitar viagem
 
 [Home 13 (Modal Endereço)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-13-modal-endereco)
 
 [Home 14 (Modal Endereço - States)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-14-modal-endereco-states)
 > Criação do modal
+
 > Geocoder
+
 > iniciando pesquisa no modal
+
