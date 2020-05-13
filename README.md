@@ -69,3 +69,8 @@ Maps direction | `npm i react-native-maps-directions --save`
 > Botão solicitar viagem
 
 [Home 13 (Modal Endereço)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-13-modal-endereco)
+
+[Home 14 (Modal Endereço - States)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-14-modal-endereco-states)
+> Criação do modal
+> Geocoder
+> iniciando pesquisa no modal
