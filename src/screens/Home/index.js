@@ -4,7 +4,7 @@ import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import MapViewDirections from 'react-native-maps-directions';
-import {MapsAPI} from '../../config';
+import {MapsAPI} from '../../.config';
 import useDevsUberApi from '../../useDevsUberApi';
 import AdressModal from '../../components/AdressModal';
 
@@ -56,10 +56,11 @@ const Page = () => {
   const [requestTime, setRequestTime] = useState(0);
   // Preço
   const [requestPrice, setRequestPrice] = useState(0);
-  // Modal
+  // Modal de components
   const [modalTitle, setModalTitle] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
+  // Inicia geocoder
   useEffect(() => {
     Geocoder.init(MapsAPI, {language: 'pt-br'});
     getMyCurrentPosition();
@@ -119,7 +120,7 @@ const Page = () => {
   //Função captura clik no mapa destino
   const handleToClick = async () => {
     //Pega localização
-    const geo = await Geocoder.from('Olympia');
+    const geo = await Geocoder.from('Camarao Sul');
     //Se achou local
     if (geo.results.length > 0) {
       //Montagem
@@ -167,6 +168,7 @@ const Page = () => {
   // Botão Solicitar
   const handleRequestGo = () => {};
 
+  // Botão cancelar
   const handleRequestCancel = () => {
     setToLoc({});
     setShowDirections(false);
