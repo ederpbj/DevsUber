@@ -13,7 +13,7 @@ Iniciando projeto v2
 [DevsUber](https://github.com/ederpbj/DevsUber.git)
 
 ## Comando no terminal
-c
+
 Descrição | Comando
 --------- | ------
 Iniciar projeto react-native|`npx react-native init SosCidadao`
@@ -53,6 +53,8 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 ## Links Uteis 
 
+[Documentação React-native](https://reactnative.dev/docs/getting-started.html)
+
 [Alterações no Android manifest](https://github.com/ederpbj/DevsUber/blob/master/android/app/src/main/AndroidManifest.xml)
 
 ## Aulas 
@@ -65,3 +67,5 @@ Maps direction | `npm i react-native-maps-directions --save`
 [Home 12 (Cancelar Viagem)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-12-cancelar-viagem)
 > Botão cancelar viagem
 > Botão solicitar viagem
+
+[Home 13 (Modal Endereço)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-13-modal-endereco)

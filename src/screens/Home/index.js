@@ -6,6 +6,7 @@ import Geocoder from 'react-native-geocoding';
 import MapViewDirections from 'react-native-maps-directions';
 import {MapsAPI} from '../../config';
 import useDevsUberApi from '../../useDevsUberApi';
+import AdressModal from '../../components/AdressModal';
 
 //Desabilita yellow box
 console.disableYellowBox = true;
@@ -55,6 +56,9 @@ const Page = () => {
   const [requestTime, setRequestTime] = useState(0);
   // Preço
   const [requestPrice, setRequestPrice] = useState(0);
+  // Modal
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     Geocoder.init(MapsAPI, {language: 'pt-br'});
@@ -107,12 +111,15 @@ const Page = () => {
   };
 
   //Função captura clik no mapa origem
-  const handleFromClick = () => {};
+  const handleFromClick = () => {
+    setModalTitle('Escolha uma origem');
+    setModalVisible(true);
+  };
 
   //Função captura clik no mapa destino
   const handleToClick = async () => {
     //Pega localização
-    const geo = await Geocoder.from('Valentina Figueiredo');
+    const geo = await Geocoder.from('Olympia');
     //Se achou local
     if (geo.results.length > 0) {
       //Montagem
@@ -150,17 +157,15 @@ const Page = () => {
       edgePadding: {
         left: 50,
         right: 50,
-        bottom: 50,
-        top: 1200,
+        bottom: 20,
+        top: 1400,
       },
     });
     // console.log("RES: ",r)
   };
 
   // Botão Solicitar
-  const handleRequestGo = () => {
-
-  }
+  const handleRequestGo = () => {};
 
   const handleRequestCancel = () => {
     setToLoc({});
@@ -170,19 +175,25 @@ const Page = () => {
     setRequestPrice(0);
     // Voltar a posição original
     setMapLoc(fromLoc);
-  }
+  };
 
   // Monitora mudança na posição do mapa
   const handleMapChange = async () => {
     // Pegar camera
     const cam = await map.current.getCamera();
     cam.altitude = 0;
+    // cam.zoom = 0;
     setMapLoc(cam);
-  }
+  };
 
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
+      <AdressModal
+        title={modalTitle}
+        visible={modalVisible}
+        visibleAction={setModalVisible}
+      />
       <MapView
         ref={map}
         style={{flex: 1}}
@@ -240,7 +251,7 @@ const Page = () => {
             )}
           </>
         </IntineraryItem>
-        {fromLoc.center && toLoc.center &&
+        {fromLoc.center && toLoc.center && (
           <IntineraryItem>
             <>
               <RequestDetails>
@@ -275,7 +286,7 @@ const Page = () => {
               </RequestButtons>
             </>
           </IntineraryItem>
-        }
+        )}
       </IntineraryArea>
     </Container>
   );
