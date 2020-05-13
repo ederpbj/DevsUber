@@ -81,3 +81,8 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 > iniciando pesquisa no modal
 
+[Home 15 (Modal Endereço - Pesquisa)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-15-modal-endereco-pesquisa)
+
+> Finalisando pesquisa
+
+> Limpar campos de pesquisa

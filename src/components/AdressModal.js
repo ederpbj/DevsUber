@@ -49,6 +49,9 @@ const ModalResultText = styled.Text`
   font-size: 16px;
 `;
 
+// Tempo de espera para pesquisar
+let timer;
+
 export default props => {
   // Armazenar resultados, array vazio
   const [results, setResults] = useState([]);
@@ -61,6 +64,32 @@ export default props => {
   useEffect(() => {
     if (searchText) {
       // fazer a pesquisa...
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(async () => {
+        console.log('FAZENDO PESQUISA!');
+        //Busca localização pelo texto digitado
+        const geo = await Geocoder.from(searchText);
+        console.log('RESULTADO!', geo.results.length);
+
+        //Se achou local
+        if (geo.results.length > 0) {
+          let tmpResults = [];
+
+          for (let i in geo.results) {
+            // Adicionar um item
+            tmpResults.push({
+              address: geo.results[i].formatted_address,
+              latitude: geo.results[i].geometry.location.lat,
+              longitude: geo.results[i].geometry.location.lng,
+            });
+          }
+          setResults(tmpResults);
+        } else {
+          setResults([]);
+        }
+      }, 1000);
     }
   }, [searchText]);
 
@@ -74,9 +103,17 @@ export default props => {
     Geocoder.init(MapsAPI, {language: 'pt-br'});
   }, []);
 
+  const handleClose = () => {
+    setResults([]);
+    setSearchText('');
+  };
   // <ModalTitle>{props.title}</ModalTitle>
   return (
-    <Modal animationType="slide" transparent={false} visible={props.visible}>
+    <Modal
+      animationType="slide"
+      transparent={false}
+      visible={props.visible}
+      onShow={handleClose}>
       <ModalArea>
         <ModalHeader>
           <ModalClose onPress={handleCloseAction}>
