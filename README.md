@@ -57,6 +57,8 @@ Maps direction | `npm i react-native-maps-directions --save`
 
 [Alterações no Android manifest](https://github.com/ederpbj/DevsUber/blob/master/android/app/src/main/AndroidManifest.xml)
 
+[Aprenda React Native #5 - Criando tela de login em 10 minutos](https://www.youtube.com/watch?v=Mso_obs3-jY&ab_channel=CanalGeekDev)
+
 ## Aulas 
 
 [Home 8 (Intinerário)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-8-intinerario)
