@@ -37,7 +37,7 @@ const ModalInput = styled.TextInput`
 `;
 
 const ModalResults = styled.View`
-  background-color: #ff0000;
+  /* background-color: ; */
 `;
 
 const ModalResult = styled.TouchableHighlight`
@@ -68,10 +68,10 @@ export default props => {
         clearTimeout(timer);
       }
       timer = setTimeout(async () => {
-        console.log('FAZENDO PESQUISA!');
+        // console.log('FAZENDO PESQUISA!');
         //Busca localização pelo texto digitado
         const geo = await Geocoder.from(searchText);
-        console.log('RESULTADO!', geo.results.length);
+        // console.log('RESULTADO!', geo.results.length);
 
         //Se achou local
         if (geo.results.length > 0) {
@@ -107,6 +107,15 @@ export default props => {
     setResults([]);
     setSearchText('');
   };
+
+  // Função que recebe o item que foi clicado (endereço)
+  const handleResultClick = item => {
+    // clicar, manda item contendo endereço e field (to ou from)
+    props.clickAction(props.field, item);
+    // Fechar modal
+    props.visibleAction(false);
+  };
+
   // <ModalTitle>{props.title}</ModalTitle>
   return (
     <Modal
@@ -129,7 +138,7 @@ export default props => {
         </ModalHeader>
         <ModalResults>
           {results.map((i, k) => (
-            <ModalResult key={k}>
+            <ModalResult key={k} onPress={() => handleResultClick(i)}>
               <ModalResultText>{i.address}</ModalResultText>
             </ModalResult>
           ))}

@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, ActivityIndicator, Alert} from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
@@ -7,6 +7,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import {MapsAPI} from '../../.config';
 import useDevsUberApi from '../../useDevsUberApi';
 import AdressModal from '../../components/AdressModal';
+import DriverModal from '../../components/DriverModal';
 
 //Desabilita yellow box
 console.disableYellowBox = true;
@@ -28,6 +29,7 @@ import {
   RequestButtons,
   RequestButton,
   RequestButtonText,
+  LoadingArea,
 } from './styled';
 
 const Page = () => {
@@ -56,9 +58,19 @@ const Page = () => {
   const [requestTime, setRequestTime] = useState(0);
   // Preço
   const [requestPrice, setRequestPrice] = useState(0);
-  // Modal de components
+  // AddressModal: Modal de components
   const [modalTitle, setModalTitle] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalField, setModalField] = useState('');
+
+  // DriverModal
+  // informações em texto
+  const [driverInfo, setDriverInfo] = useState('');
+  // exibir modal
+  const [driverModalVisible, setDriverModalVisible] = useState(false);
+
+  // carregar
+  const [loading, setLoading] = useState(false);
 
   // Inicia geocoder
   useEffect(() => {
@@ -66,11 +78,19 @@ const Page = () => {
     getMyCurrentPosition();
   }, []);
 
+  // para mostrar marker
   useEffect(() => {
-    if (fromLoc.center && toLoc.center) {
+    if (toLoc.center) {
       setShowDirections(true);
     }
   }, [toLoc]);
+
+  // para mostrar marker
+  useEffect(() => {
+    if (fromLoc.center) {
+      setMapLoc(fromLoc);
+    }
+  }, [fromLoc]);
 
   //Pegar as informações da minha localização atual
   const getMyCurrentPosition = () => {
@@ -114,11 +134,17 @@ const Page = () => {
   //Função captura clik no mapa origem
   const handleFromClick = () => {
     setModalTitle('Escolha uma origem');
+    // da pesquisa: seta o campo e manda para o modal'
+    setModalField('from');
     setModalVisible(true);
   };
 
   //Função captura clik no mapa destino
   const handleToClick = async () => {
+    setModalTitle('Escolha um destino');
+    setModalField('to');
+    setModalVisible(true);
+    /*
     //Pega localização
     const geo = await Geocoder.from('Camarao Sul');
     //Se achou local
@@ -138,6 +164,8 @@ const Page = () => {
       //Quando setar preenche no app o to
       setToLoc(loc);
     }
+
+     */
   };
 
   // Rotas
@@ -159,14 +187,40 @@ const Page = () => {
         left: 50,
         right: 50,
         bottom: 20,
-        top: 1400,
+        top: 1500,
       },
     });
     // console.log("RES: ",r)
   };
 
   // Botão Solicitar
-  const handleRequestGo = () => {};
+  const handleRequestGo = async () => {
+    // tela carregando...
+    setLoading(true);
+    // achar motorista, criar na api
+    const driver = await api.findDriver({
+      fromlat: fromLoc.center.latitude,
+      fromlng: fromLoc.center.longitude,
+      tolat: fromLoc.center.latitude,
+      tolng: fromLoc.center.longitude,
+      // from: {
+
+      // },
+      // to: {
+
+      // }
+    });
+    setLoading(false);
+    if (!driver.error) {
+      // achou motorista
+      setDriverInfo(driver.driver);
+      setDriverModalVisible(true);
+      // Limpar
+      handleRequestCancel();
+    } else {
+      Alert.alert(driver.error);
+    }
+  };
 
   // Botão cancelar
   const handleRequestCancel = () => {
@@ -188,13 +242,52 @@ const Page = () => {
     setMapLoc(cam);
   };
 
+  // Quando usuário clicar no endereço
+  const handleModalClick = (field, address) => {
+    //Montagem
+    const loc = {
+      name: address.address,
+      center: {
+        latitude: address.latitude,
+        longitude: address.longitude,
+      },
+      zoom: 16,
+      pitch: 0,
+      altitude: 0,
+      heading: 0,
+    };
+    // campo from ou to
+    // console.log('FIELD', field);
+    // endereço escolhido
+    // console.log('ADRESS', address);
+
+    switch (field) {
+      case 'from':
+        setFromLoc(loc);
+        break;
+      case 'to':
+        setToLoc(loc);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
-      <AdressModal
+      <DriverModal
+        driver={driverInfo}
+        visible={driverModalVisible}
+        visibleAction={setDriverModalVisible}
+      />
+      <AdressModal //busca de endereço
         title={modalTitle}
         visible={modalVisible}
         visibleAction={setModalVisible}
+        field={modalField}
+        clickAction={handleModalClick}
       />
       <MapView
         ref={map}
@@ -290,6 +383,11 @@ const Page = () => {
           </IntineraryItem>
         )}
       </IntineraryArea>
+      {loading && (
+        <LoadingArea>
+          <ActivityIndicator size="large" color="#FFF" />
+        </LoadingArea>
+      )}
     </Container>
   );
 };

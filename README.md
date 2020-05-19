@@ -29,7 +29,7 @@ Ver commits realizados|`git shortlog`
 No ios | `cd ios`
 No ios cont. | `pod install`
 Remover node modules | `rimraf node_modules`
-Desinstalar app do adb android | `adb uninstall com.soscidadao`
+Desinstalar app do adb android | `adb uninstall com.devsuber`
 
 ## Bibliotecas
 
@@ -50,6 +50,7 @@ Community cli | `yarn add @react-native-community/cli`
 Geo location | `npm install @react-native-community/geolocation --save`
 Geo coding | `npm install --save react-native-geocoding`
 Maps direction | `npm i react-native-maps-directions --save`
+Votação | `npm install react-native-ratings --save`
 
 ## Links Uteis 
 
