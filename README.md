@@ -51,6 +51,7 @@ Geo location | `npm install @react-native-community/geolocation --save`
 Geo coding | `npm install --save react-native-geocoding`
 Maps direction | `npm i react-native-maps-directions --save`
 Votação | `npm install react-native-ratings --save`
+Instalar cli, erro de imagem | `npm i -g react-native-cli`
 
 ## Links Uteis 
 

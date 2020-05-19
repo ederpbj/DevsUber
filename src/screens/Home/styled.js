@@ -16,11 +16,26 @@ export const Container = styled.View`
             <IntineraryValue>...</IntineraryValue>
 */
 
+export const MenuArea = styled.TouchableHighlight`
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const MenuImage = styled.Image`
+  width: 24px;
+  height: 24px;
+`;
+
 export const IntineraryArea = styled.View`
   position: absolute;
   left: 10px;
   right: 10px;
-  top: 50px;
+  top: 60px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 0px 4px #999;
@@ -110,3 +125,4 @@ export const LoadingArea = styled.View`
   justify-content: center;
   align-items: center;
 `;
+

@@ -15,6 +15,8 @@ console.disableYellowBox = true;
 
 import {
   Container,
+  MenuArea,
+  MenuImage,
   IntineraryArea,
   IntineraryItem,
   IntineraryLabel,
@@ -32,7 +34,8 @@ import {
   LoadingArea,
 } from './styled';
 
-const Page = () => {
+// pegando props
+const Page = props => {
   const map = useRef();
   const api = useDevsUberApi();
 
@@ -274,6 +277,10 @@ const Page = () => {
     }
   };
 
+  const handleMenu = () => {
+    props.navigation.openDrawer();
+  }
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
@@ -316,6 +323,9 @@ const Page = () => {
           />
         )}
       </MapView>
+      <MenuArea onPress={handleMenu} underlayColor="transparent" >
+        <MenuImage source={require('../../assets/images/menu.png')} />
+      </MenuArea>
       <IntineraryArea>
         <IntineraryItem onPress={handleFromClick} underlayColor="#EEE">
           <>
