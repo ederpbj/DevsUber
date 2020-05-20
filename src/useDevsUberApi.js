@@ -5,13 +5,15 @@ export default () => ({
       setTimeout(() => {
         let json = {
           error: '',
+          token: '123',
+          name: 'Paulo da Silva',
         };
 
-        if (email === 'erro@hotmail.com') {
-          json.error = 'E-mail e / ou senha errados!';
-        } else {
-          json.token = '123';
-        }
+        // if (email === 'erro@hotmail.com') {
+        //   json.error = 'E-mail e / ou senha errados!';
+        // } else {
+        //   json.token = '123';
+        // }
         resolve(json);
       }, 1000);
     });
@@ -29,6 +31,7 @@ export default () => ({
           json.error = 'E-mail e / ou senha errados!';
         } else {
           json.token = '123';
+          json.name = 'Paulo da Silva';
         }
         resolve(json);
       }, 1000);

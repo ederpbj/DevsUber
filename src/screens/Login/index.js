@@ -16,6 +16,7 @@ import {
 
 //Reducer
 import {StackActions, NavigationActions} from 'react-navigation';
+// Conectar com redux
 import {connect} from 'react-redux';
 
 const Page = props => {
@@ -43,6 +44,8 @@ const Page = props => {
       } else {
         //1. guardar o token no reducer, setar no reducer
         props.setToken(res.token);
+        // Setar nome
+        props.setName(res.name);
         //2. Redirecionar para o Home
         props.navigation.dispatch(
           StackActions.reset({
@@ -53,7 +56,7 @@ const Page = props => {
           }),
         );
       }
-      console.log(res);
+      // console.log(res);
     }
   };
 
@@ -69,6 +72,8 @@ const Page = props => {
       } else {
         //1. guardar o token no reducer, setar no reducer
         props.setToken(res.token);
+        // Setar nome
+        props.setName(res.name);
         //2. Redirecionar para o Home
         props.navigation.dispatch(
           StackActions.reset({

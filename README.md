@@ -90,3 +90,6 @@ Instalar cli, erro de imagem | `npm i -g react-native-cli`
 > Finalisando pesquisa
 
 > Limpar campos de pesquisa
+
+
+*** corrigir erro de login
