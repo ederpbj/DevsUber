@@ -1,6 +1,6 @@
 const initialState = {
   token: '',
-  name: '',
+  name: 'Padrão',
 };
 
 export default (state = initialState, action) => {

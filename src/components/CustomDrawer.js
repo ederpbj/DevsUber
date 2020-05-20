@@ -46,7 +46,7 @@ const LogoutButtonText = styled.Text`
 const CustomDrawer = props => {
   // export default (props) => {
   const handleLogout = () => {
-    // Zera token
+    // Zera token, faz logout
     props.setToken('');
     // Manda para preload
     props.navigation.navigate('Preload');
@@ -57,7 +57,7 @@ const CustomDrawer = props => {
         <Header>
           <UserAvatar />
           <UserInfo>
-            <UserName>{props.name}</UserName>
+            <UserName>Nome:{props.name}</UserName>
             <LogoutButton onPress={handleLogout} underlayColor="transparent">
               <LogoutButtonText>Sair</LogoutButtonText>
             </LogoutButton>
@@ -72,7 +72,6 @@ const CustomDrawer = props => {
 // Conectar com redux
 const mapStateToProps = state => {
   return {
-    // pega o name do redux
     name: state.userReducer.name,
   };
 };

@@ -30,6 +30,9 @@ No ios | `cd ios`
 No ios cont. | `pod install`
 Remover node modules | `rimraf node_modules`
 Desinstalar app do adb android | `adb uninstall com.devsuber`
+Could not connect | `adb reverse tcp:8081 tcp:8081`
+Clear grandlew | `./gradlew clean`
+Run android | `react-native run-android`
 
 ## Bibliotecas
 

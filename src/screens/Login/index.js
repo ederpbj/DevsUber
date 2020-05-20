@@ -44,7 +44,7 @@ const Page = props => {
       } else {
         //1. guardar o token no reducer, setar no reducer
         props.setToken(res.token);
-        // Setar nome
+        // Setar nome, manda para redux
         props.setName(res.name);
         //2. Redirecionar para o Home
         props.navigation.dispatch(
@@ -72,7 +72,7 @@ const Page = props => {
       } else {
         //1. guardar o token no reducer, setar no reducer
         props.setToken(res.token);
-        // Setar nome
+        // Setar nome, manda para redux
         props.setName(res.name);
         //2. Redirecionar para o Home
         props.navigation.dispatch(
@@ -164,7 +164,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    // seta variáveis, pega do store redux
     setToken: token => dispatch({type: 'SET_TOKEN', payload: {token}}),
+    setName: name => dispatch({type: 'SET_NAME', payload: {name}}),
   };
 };
 export default connect(
