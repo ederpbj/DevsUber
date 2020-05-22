@@ -65,6 +65,7 @@ const Page = props => {
   const [modalTitle, setModalTitle] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalField, setModalField] = useState('');
+  const [infor, setInfor] = useState([]);
 
   // DriverModal
   // informações em texto
@@ -206,17 +207,15 @@ const Page = props => {
       fromlng: fromLoc.center.longitude,
       tolat: fromLoc.center.latitude,
       tolng: fromLoc.center.longitude,
-      // from: {
-
-      // },
-      // to: {
-
-      // }
     });
     setLoading(false);
     if (!driver.error) {
       // achou motorista
       setDriverInfo(driver.driver);
+      setInfor(fromLoc.center.latitude);
+
+      await api.getRequestHistory(driverInfo, infor);
+
       setDriverModalVisible(true);
       // Limpar
       handleRequestCancel();
@@ -279,7 +278,7 @@ const Page = props => {
 
   const handleMenu = () => {
     props.navigation.openDrawer();
-  }
+  };
 
   return (
     <Container>
@@ -323,7 +322,7 @@ const Page = props => {
           />
         )}
       </MapView>
-      <MenuArea onPress={handleMenu} underlayColor="transparent" >
+      <MenuArea onPress={handleMenu} underlayColor="transparent">
         <MenuImage source={require('../../assets/images/menu.png')} />
       </MenuArea>
       <IntineraryArea>

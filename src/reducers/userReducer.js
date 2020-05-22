@@ -1,6 +1,7 @@
 const initialState = {
   token: '',
-  name: 'Padrão',
+  name: '',
+  history: '',
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +11,9 @@ export default (state = initialState, action) => {
       break;
     case 'SET_TOKEN':
       return {...state, token: action.payload.token};
+      break;
+    case 'SET_HISTORY':
+      return {...state, history: action.payload.history};
       break;
   }
 

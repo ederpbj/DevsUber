@@ -95,11 +95,7 @@ export default props => {
   const handleRating = async rating => {
     // pega função da api, para fechar modal após estrelas
     await api.setingRating(rating);
-    // History
-    await api.getRequestHistory(props.driver.name, props.info);
-
     props.visibleAction(false);
-
     Alert.alert('Obrigado pela viagem!');
   };
 

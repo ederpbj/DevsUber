@@ -55,6 +55,7 @@ Geo coding | `npm install --save react-native-geocoding`
 Maps direction | `npm i react-native-maps-directions --save`
 Votação | `npm install react-native-ratings --save`
 Instalar cli, erro de imagem | `npm i -g react-native-cli`
+Redux kit | `@reduxjs/toolkit`
 
 ## Links Uteis 
 
@@ -68,31 +69,11 @@ Instalar cli, erro de imagem | `npm i -g react-native-cli`
 
 [Home 8 (Intinerário)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-8-intinerario)
 
-[Home 9 (Directions)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-9-directions)
+*** Info Extra 2 (Tela Histórico):
 
-[Home 10 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-10-tempo-preco-e-distancia)
+** Histórico de viagens
 
-[Home 11 (Tempo, Preço e Distância)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-11-tempo-preco-e-distancia)
-
-[Home 12 (Cancelar Viagem)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-12-cancelar-viagem)
-> Botão cancelar viagem
-
-> Botão solicitar viagem
-
-[Home 13 (Modal Endereço)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-13-modal-endereco)
-
-[Home 14 (Modal Endereço - States)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-14-modal-endereco-states)
-> Criação do modal
-
-> Geocoder
-
-> iniciando pesquisa no modal
-
-[Home 15 (Modal Endereço - Pesquisa)](https://alunos.b7web.com.br/curso/react-native/devsuber-home-15-modal-endereco-pesquisa)
-
-> Finalisando pesquisa
-
-> Limpar campos de pesquisa
-
-
-*** corrigir erro de login
+- Quando foi
+- De onde foi
+- Pra onde foi
+- Valor

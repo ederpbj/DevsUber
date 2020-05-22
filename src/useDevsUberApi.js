@@ -94,4 +94,25 @@ export default () => ({
       }, 1000);
     });
   },
+
+  getRequestHistory: (driverInfo, infor) => {
+    return new Promise((resolve, reject) => {
+      //Login fake
+      setTimeout(() => {
+        let json = {
+          error: '',
+        };
+        json.history = {
+          name: driverInfo,
+        };
+        console.log()
+        // console.log('Driver xxxxx', driverInfo);
+        // console.log('Infor xxxxx', infor);
+
+        // json.history.push()
+
+        resolve(json);
+      }, 1000);
+    });
+  },
 });
